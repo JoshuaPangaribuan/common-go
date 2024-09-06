@@ -3,7 +3,7 @@ disable-version-string: True
 log-level: info
 packages:
 
-  github.com/Joshua25401/common-go/config:
+  github.com/JoshuaPangaribuan/common-go/config:
     config:
       all: True
       inpackage: True
