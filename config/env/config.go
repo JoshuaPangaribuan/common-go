@@ -1,7 +1,6 @@
 package env
 
 import (
-	"os"
 	"strconv"
 	"strings"
 )
@@ -9,20 +8,20 @@ import (
 func (e *envconfig) GetObject(key string) any {
 	e.rwMutex.RLock()
 	defer e.rwMutex.RUnlock()
-	return os.Getenv(e.prefix + key)
+	return e.data[e.prefix+key]
 }
 
 func (e *envconfig) GetString(key string) string {
 	e.rwMutex.RLock()
 	defer e.rwMutex.RUnlock()
-	return os.Getenv(e.prefix + key)
+	return e.data[e.prefix+key]
 }
 
 func (e *envconfig) GetInt(key string) int64 {
 	e.rwMutex.RLock()
 	defer e.rwMutex.RUnlock()
 
-	intRes, err := strconv.ParseInt(os.Getenv(e.prefix+key), 10, 64)
+	intRes, err := strconv.ParseInt(e.data[e.prefix+key], 10, 64)
 	if err != nil {
 		intRes = 0
 	}
@@ -34,7 +33,7 @@ func (e *envconfig) GetFloat(key string) float64 {
 	e.rwMutex.RLock()
 	defer e.rwMutex.RUnlock()
 
-	floatRes, err := strconv.ParseFloat(os.Getenv(e.prefix+key), 64)
+	floatRes, err := strconv.ParseFloat(e.data[e.prefix+key], 64)
 	if err != nil {
 		floatRes = 0
 	}
@@ -46,7 +45,7 @@ func (e *envconfig) GetUint(key string) uint64 {
 	e.rwMutex.RLock()
 	defer e.rwMutex.RUnlock()
 
-	uintRes, err := strconv.ParseUint(os.Getenv(e.prefix+key), 10, 64)
+	uintRes, err := strconv.ParseUint(e.data[e.prefix+key], 10, 64)
 	if err != nil {
 		uintRes = 0
 	}
@@ -58,7 +57,7 @@ func (e *envconfig) GetBool(key string) bool {
 	e.rwMutex.RLock()
 	defer e.rwMutex.RUnlock()
 
-	boolRes, err := strconv.ParseBool(os.Getenv(e.prefix + key))
+	boolRes, err := strconv.ParseBool(e.data[e.prefix+key])
 	if err != nil {
 		boolRes = false
 	}
@@ -70,7 +69,7 @@ func (e *envconfig) GetArray(key string) []any {
 	e.rwMutex.RLock()
 	defer e.rwMutex.RUnlock()
 
-	strArr := strings.Split(os.Getenv(e.prefix+key), ",")
+	strArr := strings.Split(e.data[e.prefix+key], ",")
 	result := make([]any, len(strArr))
 
 	for i, v := range strArr {
@@ -84,7 +83,7 @@ func (e *envconfig) GetMap(key string) map[string]any {
 	e.rwMutex.RLock()
 	defer e.rwMutex.RUnlock()
 
-	strArr := strings.Split(os.Getenv(e.prefix+key), ",")
+	strArr := strings.Split(e.data[e.prefix+key], ",")
 	result := make(map[string]any)
 
 	for _, v := range strArr {
