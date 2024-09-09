@@ -6,13 +6,13 @@ import (
 	"os"
 	"sync"
 
-	"github.com/JoshuaPangaribuan/common-go/config"
+	common "github.com/JoshuaPangaribuan/common-go"
 	"github.com/fsnotify/fsnotify"
 	"github.com/joho/godotenv"
 )
 
-var _ config.Secret = (*envconfig)(nil)
-var _ config.Config = (*envconfig)(nil)
+var _ common.Secret = (*envconfig)(nil)
+var _ common.Config = (*envconfig)(nil)
 
 type envconfig struct {
 	io.Closer

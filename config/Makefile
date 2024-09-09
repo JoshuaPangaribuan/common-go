@@ -1,2 +1,0 @@
-mockery:
-	mockery

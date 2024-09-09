@@ -1,4 +1,4 @@
-module github.com/JoshuaPangaribuan/common-go/config
+module github.com/JoshuaPangaribuan/common-go
 
 go 1.20
 

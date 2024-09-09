@@ -1,4 +1,4 @@
-package config
+package commongo
 
 type Config interface {
 	GetObject(key string) any

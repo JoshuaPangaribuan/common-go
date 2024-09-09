@@ -1,0 +1,21 @@
+language: go
+
+go:
+  - "1.20"
+  - "1.19"
+  - "1.18"
+
+env:
+  - GO111MODULE=on
+
+stages:
+  - name: deploy
+
+before_install: 
+  - go get ./...
+  
+jobs:
+  include:
+    - stage: deploy 
+      script:
+        - echo "All done!"
